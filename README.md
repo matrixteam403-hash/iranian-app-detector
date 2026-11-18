@@ -16,7 +16,7 @@ through the official Android confirmation dialog, one app at a time.
 [![Kotlin 1.9](https://img.shields.io/badge/Kotlin-1.9.24-2EE59D.svg)](#)
 [![Tests](https://img.shields.io/badge/unit%20tests-93%20passing-2EE59D.svg)](#testing)
 
-<img src="brand/motion-poster.png" width="720" alt="App identity motion poster">
+<img src="brand/motion-full-poster.png" width="860" alt="Iranian App Detector — end card of the identity film">
 
 </div>
 
@@ -38,6 +38,7 @@ through the official Android confirmation dialog, one app at a time.
 12. [Known limitations](#12-known-limitations)
 13. [Privacy](#13-privacy)
 14. [فارسی](#14-فارسی)
+15. [Full application description](#15-full-application-description)
 
 ---
 
@@ -199,7 +200,7 @@ echo "sdk.dir=/path/to/Android/Sdk" > local.properties
 
 ./gradlew :app:assembleDebug          # installable debug build
 ./gradlew :app:assembleRelease        # release build (R8 is opt-in: -PiranDetector.r8=true)
-./gradlew :app:testDebugUnitTest      # 85 JVM unit tests, no emulator needed
+./gradlew :app:testDebugUnitTest      # 93 JVM unit tests, no emulator needed
 ```
 
 The repository ships a `gradlew` shim instead of the binary wrapper jar. On a normal machine run
@@ -292,12 +293,26 @@ app/src/main/kotlin/ir/irandetector/app/
 |---|---|
 | `brand/logo.svg` | Master logo, vector source (shield + radar) |
 | `brand/logo-512.png`, `brand/logo-1024.png` | Raster exports (GitHub avatar / README) |
-| `brand/motion-logo.mp4` | 7 s, 1280×720, 30 fps logo reveal (H.264) |
-| `brand/motion-logo.gif` | Same animation as a README-friendly GIF |
-| `brand/motion-poster.png` | Poster / thumbnail frame |
-| `brand/render_motion.py` | The renderer itself — the animation is code, fully reproducible (`python3 brand/render_motion.py`, needs Pillow + ffmpeg) |
+| `brand/motion-full.mp4` | **The identity film** — 18 s, 1920×1080, 30 fps, three scenes (identity → detection → VPN Hunter), H.264, ~1.8 MB |
+| `brand/motion-full.webm` | Same film, VP9, for embedding |
+| `brand/motion-full-poster.png` | End card, used as the README hero |
+| `brand/motion-full-{identity,detection,protection}.png` | Scene stills |
+| `brand/motion-logo.mp4` | The 7 s square logo reveal (social / avatar loop) |
+| `brand/motion-poster.png` | Poster frame of the loop |
+| `brand/render_motion_full.py` | Renderer for the 18 s film — every frame is code, reproducible byte-for-byte (`python3 brand/render_motion_full.py`, needs Pillow + imageio-ffmpeg) |
+| `brand/render_motion.py` | Renderer for the 7 s loop |
 
-<div align="center"><img src="brand/motion-logo.gif" width="640" alt="Motion logo"></div>
+**The film, scene by scene**
+
+| Time | Scene | What happens |
+|---|---|---|
+| 0:00–0:05 | Identity | The shield stroke draws on, the radar sweep starts inside the silhouette, sonar blips pop, the wordmark and feature pills settle in |
+| 0:05–0:11 | Detection | Package rows slide in, a scan band sweeps them, each resolves to Verified / Probable / Uncertain with its confidence bar, and the session counters count up |
+| 0:11–0:18 | Protection | VPN Hunter's five methods light up one by one, then the per-app **Remove** card and the confirmation caption, then the end card |
+
+<div align="center"><img src="brand/motion-full-identity.png" width="720" alt="Scene 1: identity"></div>
+<div align="center"><img src="brand/motion-full-detection.png" width="720" alt="Scene 2: detection"></div>
+<div align="center"><img src="brand/motion-full-protection.png" width="720" alt="Scene 3: VPN Hunter and per-app removal"></div>
 
 The launcher icon (`app/src/main/res/drawable/ic_launcher_foreground.xml`) is the same shield
 glyph as adaptive vector art, with a monochrome layer for Android 13+ themed icons — no PNG
@@ -356,6 +371,13 @@ request is the database update you configure yourself. See `SECURITY.md`.
   ضربه باز می‌شود و توضیح داده شده است.
 * بدون تبلیغات، بدون ردیابی، بدون نیاز به روت. تنها درخواست شبکه‌ای، به‌روزرسانی پایگاه‌داده
   است که آدرسش را خودتان وارد می‌کنید.
+
+## 15. Full application description
+
+| Document | Contents |
+|---|---|
+| [`docs/APP_DESCRIPTION.fa.md`](docs/APP_DESCRIPTION.fa.md) | **توضیحات کامل فارسی** — features, ten detection signals, VPN Hunter's five methods, per-app removal, permissions, privacy, install, build, limitations, FAQ, store copy |
+| [`docs/APP_DESCRIPTION.en.md`](docs/APP_DESCRIPTION.en.md) | The same document in English, for the repository, the release page and store listings |
 
 ---
 
