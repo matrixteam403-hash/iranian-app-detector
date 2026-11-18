@@ -16,7 +16,7 @@ through the official Android confirmation dialog, one app at a time.
 [![Kotlin 1.9](https://img.shields.io/badge/Kotlin-1.9.24-2EE59D.svg)](#)
 [![Tests](https://img.shields.io/badge/unit%20tests-93%20passing-2EE59D.svg)](#testing)
 
-<img src="brand/motion-full-poster.png" width="860" alt="Iranian App Detector — end card of the identity film">
+<img src="brand/motion-full-identity.png" width="860" alt="Iranian App Detector — end card of the identity film">
 
 </div>
 
