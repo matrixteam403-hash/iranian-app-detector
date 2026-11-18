@@ -1,0 +1,38 @@
+name: Detection database addition
+description: Report a missing Iranian app (verified ids only)
+labels: [ database ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The database only accepts **verified** identifiers. Cite a public source
+        (Play Store / Cafe Bazaar / Myket listing, or published APK metadata) for the
+        package id. Unverified ids are rejected — the engine must never guess.
+  - type: input
+    id: app
+    attributes:
+      label: Application name (English and Persian)
+      placeholder: Digikala / دیجی‌کالا
+    validations:
+      required: true
+  - type: input
+    id: package
+    attributes:
+      label: Package id
+      placeholder: com.digikala
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Public source for the package id
+      placeholder: https://play.google.com/store/apps/details?id=com.digikala
+    validations:
+      required: true
+  - type: input
+    id: certificate
+    attributes:
+      label: Signing certificate SHA-1 / SHA-256 (optional)
+      description: Only if published by the vendor or obtainable from the official APK.
+    validations:
+      required: false

@@ -1,0 +1,47 @@
+name: Bug report
+description: Something is not working as documented
+labels: [ bug ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Please do **not** paste personal data, installed-app
+        screenshots containing account names, or signing keys.
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      placeholder: 1.1.1 (Settings → About)
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and Android version
+      placeholder: Pixel 7, Android 14
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the app
+        2. Tap Scan
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logcat (optional)
+      description: Filter with `adb logcat | grep -i irandetector`
+      render: shell
+    validations:
+      required: false
