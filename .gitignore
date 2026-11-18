@@ -1,0 +1,33 @@
+# --- Android / Gradle -------------------------------------------------------
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+build/
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+lint-results*.html
+lint-results*.xml
+
+# --- Signing material: never commit these --------------------------------
+keystore.properties
+*.jks
+*.keystore
+!debug.keystore
+
+# --- Tooling ---------------------------------------------------------------
+.kotlin/
+.arena/
+.kotlin-gradle/
+
+# --- Local build artifacts / delivery bundles (kept in the release assets) --
+/deliverables/
+*.zip

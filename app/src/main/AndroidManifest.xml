@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+      QUERY_ALL_PACKAGES
+
+      The core, user-visible function of this app is to inventory installed
+      applications and explain which ones come from Iranian publishers. Android 11+
+      package visibility therefore requires this permission; without it the app
+      would only see a handful of packages and the product would not work.
+
+      Implications we document in-app and in the README:
+        * The permission lets the app read every installed package name, label,
+          installer, version and (for our own queries only) signing certificate
+          digests — on the device. None of it is ever transmitted.
+        * Google Play requires a declaration for this permission and only allows
+          it for apps whose core purpose needs it (device search, antivirus,
+          app managers). This app fits that category, but it must be declared
+          during review.
+
+      Deliberately NOT requested: INSTALL_PACKAGES (we never install anything),
+      root, device admin, accessibility services, usage-stats access, or any
+      analytics. REQUEST_DELETE_PACKAGES *is* declared — see the note below — but it
+      only permits asking the user; the system dialog still decides.
+    -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
+    <!--
+      REQUEST_DELETE_PACKAGES
+      (declared below)
+      Declared so the platform accepts our uninstall intents with
+      EXTRA_RETURN_RESULT on every OEM build. It does NOT let the app remove
+      anything silently: we never call PackageInstaller.uninstall(), we only launch
+      ACTION_UNINSTALL_PACKAGE / ACTION_DELETE, and Android always shows its own
+      full-screen confirmation that the user must accept. After the dialog closes we
+      verify the outcome with PackageManager.
+    -->
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
+
+    <!--
+      INSTALL_PACKAGES is NOT requested and must never be: Android only grants it to
+      system apps, and this app never installs anything. For the optional "open the
+      downloaded APK in the package installer" helper we launch the platform
+      installer intent instead of installing by ourselves.
+    -->
+
+    <!-- Only needed for the optional, user triggered detection-database update. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!--
+      Package visibility.
+
+      QUERY_ALL_PACKAGES covers installed-package enumeration, but intent
+      resolution against *other* apps still needs explicit <queries> entries.
+      Missing the DELETE / UNINSTALL_PACKAGE intents here is exactly why the
+      system uninstaller sometimes could not be resolved and the confirmation
+      screen never appeared:
+
+        * android.intent.action.DELETE  (package: scheme)
+        * android.intent.action.UNINSTALL_PACKAGE (package: scheme)
+
+      The PACKAGE_INSTALLER and SETTINGS entries are here for the companion
+      "how to install an APK you downloaded" flow: on several browsers the
+      download notification / open-intent cannot be routed to the package
+      installer without them.
+    -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="package" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.DELETE" />
+            <data android:scheme="package" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.UNINSTALL_PACKAGE" />
+            <data android:scheme="package" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.INSTALL_PACKAGE" />
+            <data android:scheme="package" />
+        </intent>
+        <intent>
+            <action android:name="android.content.pm.action.CONFIRM_INSTALL" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:mimeType="application/vnd.android.package-archive" />
+        </intent>
+        <intent>
+            <action android:name="android.settings.MANAGE_UNKNOWN_APP_SOURCES" />
+        </intent>
+        <intent>
+            <action android:name="android.settings.APPLICATION_SETTINGS" />
+        </intent>
+        <intent>
+            <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS" />
+            <data android:scheme="package" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".IranDetectorApp"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:enableOnBackInvokedCallback="true"
+        android:theme="@style/Theme.IranDetector">
+
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|uiMode"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.IranDetector"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

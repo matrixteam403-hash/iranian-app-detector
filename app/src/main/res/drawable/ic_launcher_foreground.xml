@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Launcher mark: shield + radar, matching brand/logo.svg.
+
+  Pure vector so the APK carries no PNG density buckets. The 108x108 adaptive
+  viewport keeps all artwork inside the 72dp safe zone (18dp inset), and the
+  group with a clip-path keeps the radar arcs and blips from ever leaking outside
+  the shield outline.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Shield body -->
+    <path
+        android:fillColor="#2EE59D"
+        android:fillAlpha="0.14"
+        android:pathData="M54,26 L78,34.5 L78,54 C78,68.5 68.4,79.2 54,84 C39.6,79.2 30,68.5 30,54 L30,34.5 Z" />
+
+    <!-- Radar content, clipped to the shield -->
+    <group>
+        <clip-path android:pathData="M54,26 L78,34.5 L78,54 C78,68.5 68.4,79.2 54,84 C39.6,79.2 30,68.5 30,54 L30,34.5 Z" />
+
+        <!-- range arcs -->
+        <path
+            android:strokeColor="#2EE59D"
+            android:strokeWidth="2.4"
+            android:strokeLineCap="round"
+            android:pathData="M46.6,56 A7.4,7.4 0 0,1 54,48.6" />
+        <path
+            android:strokeColor="#2EE59D"
+            android:strokeAlpha="0.6"
+            android:strokeWidth="2.4"
+            android:strokeLineCap="round"
+            android:pathData="M41.2,56 A12.8,12.8 0 0,1 54,43.2" />
+        <path
+            android:strokeColor="#2EE59D"
+            android:strokeAlpha="0.32"
+            android:strokeWidth="2.4"
+            android:strokeLineCap="round"
+            android:pathData="M35.8,56 A18.2,18.2 0 0,1 54,37.8" />
+
+        <!-- crosshair ticks -->
+        <path
+            android:strokeColor="#2EE59D"
+            android:strokeAlpha="0.45"
+            android:strokeWidth="1.9"
+            android:strokeLineCap="round"
+            android:pathData="M54,63 v3.2 M61,56 h3.2 M47,56 h-3.2" />
+
+        <!-- blips -->
+        <path
+            android:fillColor="#2EE59D"
+            android:pathData="M63.4,45.6 m-2.3,0 a2.3,2.3 0 1,0 4.6,0 a2.3,2.3 0 1,0 -4.6,0" />
+        <path
+            android:fillColor="#FFB74D"
+            android:fillAlpha="0.92"
+            android:pathData="M46.8,49.2 m-1.6,0 a1.6,1.6 0 1,0 3.2,0 a1.6,1.6 0 1,0 -3.2,0" />
+        <path
+            android:fillColor="#2EE59D"
+            android:fillAlpha="0.6"
+            android:pathData="M61.6,64.2 m-1.6,0 a1.6,1.6 0 1,0 3.2,0 a1.6,1.6 0 1,0 -3.2,0" />
+    </group>
+
+    <!-- Shield outline -->
+    <path
+        android:strokeColor="#2EE59D"
+        android:strokeWidth="3"
+        android:strokeLineJoin="round"
+        android:pathData="M54,26 L78,34.5 L78,54 C78,68.5 68.4,79.2 54,84 C39.6,79.2 30,68.5 30,54 L30,34.5 Z" />
+
+    <!-- Core -->
+    <path
+        android:fillColor="#07120E"
+        android:pathData="M54,56 m-5.4,0 a5.4,5.4 0 1,0 10.8,0 a5.4,5.4 0 1,0 -10.8,0" />
+    <path
+        android:fillColor="#2EE59D"
+        android:pathData="M54,56 m-3.4,0 a3.4,3.4 0 1,0 6.8,0 a3.4,3.4 0 1,0 -6.8,0" />
+    <path
+        android:fillColor="#EAFFF6"
+        android:fillAlpha="0.85"
+        android:pathData="M52.9,54.9 m-0.9,0 a0.9,0.9 0 1,0 1.8,0 a0.9,0.9 0 1,0 -1.8,0" />
+</vector>
